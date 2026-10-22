@@ -57,7 +57,7 @@ select order_id,
 count(*) as occurrences
 from orders
 group by order_id
-having count(*) > 1
+having count(*) > 1;
 
 
 -- ===================================================
@@ -91,13 +91,13 @@ where o.order_status = 'completed';
 
 -- Monthly Sales Trend
 select 
-date_format(o.ordered_at_new, '%y-%m') as sales_month,
+date_format(o.ordered_at_new, '%Y-%M') as sales_month,
 count(distinct o.order_id) as total_orders,
 sum(oi.line_total) as total_revenue
 from orders o
 join order_items oi on o.order_id = oi.order_id
 where o.order_status = 'completed'
-group by date_format(o.ordered_at_new, '%y-%m')
+group by date_format(o.ordered_at_new, '%Y-%M')
 order by sales_month;
 
 -- =====================================================
@@ -134,7 +134,7 @@ where o.order_status = 'completed'
 group by o.customer_id) s
 join customers c on s.customer_id = c.customer_id
 order by s.total_spend desc
-limit 10
+limit 10;
 
 
 -- ========================================================================
@@ -147,7 +147,7 @@ count(distinct order_id) as total_orders
 from orders
 group by date(ordered_at_new)
 order by total_orders desc
-limit 10
+limit 10;
 
 -- =============================================================
 -- STAGE 9: ANALYZE PAYMENTS
